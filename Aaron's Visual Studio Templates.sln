@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Copy-Content Template", "Copy-Content Template\src\Copy-Content Template.csproj", "{027C6150-BE9D-4F80-BD22-C9E4F97503A0}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A6F0DDB0-BCBF-40DA-A441-6351B8B023CE}"
 	ProjectSection(SolutionItems) = preProject
 		license.txt = license.txt
 		readme.md = readme.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zip-Content Template", "Zip-Content Template\Zip-Content Template.csproj", "{5D8A46FF-5DA0-4A19-B4F2-519728408C9B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Copy-Content Template", "src\Copy-Content Template\Copy-Content Template.csproj", "{027C6150-BE9D-4F80-BD22-C9E4F97503A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zip-Content Template", "src\Zip-Content Template\Zip-Content Template.csproj", "{5D8A46FF-5DA0-4A19-B4F2-519728408C9B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{038C7119-EBE5-47AC-BB5C-FB26F1D0AAD7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,5 +32,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{027C6150-BE9D-4F80-BD22-C9E4F97503A0} = {038C7119-EBE5-47AC-BB5C-FB26F1D0AAD7}
+		{5D8A46FF-5DA0-4A19-B4F2-519728408C9B} = {038C7119-EBE5-47AC-BB5C-FB26F1D0AAD7}
 	EndGlobalSection
 EndGlobal
