@@ -19,3 +19,4 @@ This project will simply add all files in the project with Build Action = Conten
 
 Useful for creating simple zip packages, or for messing with the guts of Office documents.
 
+Uses [msbuildtasks](https://github.com/loresoft/msbuildtasks) via Nuget.
