@@ -40,6 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CopyFileExample.cs" />
+    <Compile Include="CopyFile.cs">
+      <DependentUpon>CopyFile.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Gist.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -48,6 +54,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CopyFile.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CopyFile.cs</LastGenOutput>
+    </Content>
     <Content Include="Gist.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Gist.cs</LastGenOutput>
