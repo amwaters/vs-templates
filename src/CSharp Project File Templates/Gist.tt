@@ -1,0 +1,16 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".cs" #>
+<#
+
+// Change USER, GIST, CMIT (commit) and FILE to match the file you want to download:
+var USER = "amwaters";
+var GIST = "ade95805292888fb84f53d1e3e425ae8";
+var CMIT = "a2235b502badaee972ca4e4337b45cfa522208f3";
+var FILE = "Debugx.cs";
+
+var source = string.Format(@"https://gist.github.com/{0}/{1}/raw/{2}/{3}", USER, GIST, CMIT, FILE);
+Write("// File fetched from: " + source + "\n\n");
+using (var client = new System.Net.WebClient())
+	Write(client.DownloadString(source));
+
+#>
