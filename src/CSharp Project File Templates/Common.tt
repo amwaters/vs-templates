@@ -1,0 +1,41 @@
+﻿<#+
+
+public static class Gist
+{
+	public static void Download(
+		Microsoft.VisualStudio.TextTemplating.TextTransformation tt,
+		string USER, string GIST, string CMIT, string FILE)
+	{
+		var source = string.Format(@"https://gist.github.com/{0}/{1}/raw/{2}/{3}", USER, GIST, CMIT, FILE);
+
+		tt.Write("// File '" + FILE + "' downloaded from Gist at " + System.DateTime.Now.ToString()
+			+ "\n// USER: " + USER
+			+ "\n// GIST: " + GIST 
+			+ "\n// CMIT: " + CMIT
+			+ "\n// URL: " + source
+			+ "\n\n");
+
+		using (var client = new System.Net.WebClient())
+			tt.Write(client.DownloadString(source));
+	}
+}
+
+public static class File
+{
+	public static void Copy(
+		Microsoft.VisualStudio.TextTemplating.TextTransformation tt,
+		Microsoft.VisualStudio.TextTemplating.ITextTemplatingEngineHost host,
+		string PATH)
+	{
+		var file = new System.IO.FileInfo(host.ResolvePath(PATH));
+
+		tt.Write("// File '" + file.Name
+			+ "' copied at " + System.DateTime.Now.ToString()
+			+ "\r\n// PATH: " + PATH
+			+ "\r\n\r\n");
+
+		tt.Write(System.IO.File.ReadAllText(file.FullName));
+	}
+}
+
+#>

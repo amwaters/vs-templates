@@ -1,11 +1,9 @@
 ﻿<#@ template debug="false" hostspecific="true" language="C#" #>
 <#@ output extension=".cs" #>
+<#@ include file="Common.tt" #>
 <#
 
-// Change PATH to match the file you want to copy:
-var PATH = @"CopyFileExample.cs";
-
-Write("// File fetched from: " + PATH + "\r\n\r\n");
-Write(System.IO.File.ReadAllText(this.Host.ResolvePath(PATH)));
+File.Copy(this, Host,
+	@"CopyFileExample.cs");
 
 #>

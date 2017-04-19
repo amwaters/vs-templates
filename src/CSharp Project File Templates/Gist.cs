@@ -1,4 +1,8 @@
-﻿// File fetched from: https://gist.github.com/amwaters/ade95805292888fb84f53d1e3e425ae8/raw/a2235b502badaee972ca4e4337b45cfa522208f3/Debugx.cs
+﻿// File 'Debugx.cs' downloaded from Gist at 19/04/2017 2:25:53 PM
+// USER: amwaters
+// GIST: ade95805292888fb84f53d1e3e425ae8
+// CMIT: a2235b502badaee972ca4e4337b45cfa522208f3
+// URL: https://gist.github.com/amwaters/ade95805292888fb84f53d1e3e425ae8/raw/a2235b502badaee972ca4e4337b45cfa522208f3/Debugx.cs
 
 // Debugging helpers for .NET and Unity 5
 // (c) 2017 Aaron Waters, All Rights Reserved.
