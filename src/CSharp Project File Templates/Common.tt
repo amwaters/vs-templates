@@ -6,17 +6,26 @@ public static class Gist
 		Microsoft.VisualStudio.TextTemplating.TextTransformation tt,
 		string USER, string GIST, string CMIT, string FILE)
 	{
+		tt.Write(DownloadString(tt, USER, GIST, CMIT, FILE));
+	}
+
+	public static string DownloadString(
+		Microsoft.VisualStudio.TextTemplating.TextTransformation tt,
+		string USER, string GIST, string CMIT, string FILE)
+	{
 		var source = string.Format(@"https://gist.github.com/{0}/{1}/raw/{2}/{3}", USER, GIST, CMIT, FILE);
 
-		tt.Write("// File '" + FILE + "' downloaded from Gist at " + System.DateTime.Now.ToString()
+		var s = "// File '" + FILE + "' downloaded from Gist at " + System.DateTime.Now.ToString()
 			+ "\n// USER: " + USER
 			+ "\n// GIST: " + GIST 
 			+ "\n// CMIT: " + CMIT
 			+ "\n// URL: " + source
-			+ "\n\n");
+			+ "\n\n";
 
 		using (var client = new System.Net.WebClient())
-			tt.Write(client.DownloadString(source));
+			s += client.DownloadString(source);
+		
+		return s;
 	}
 }
 
