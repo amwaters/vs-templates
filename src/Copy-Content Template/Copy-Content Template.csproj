@@ -39,12 +39,14 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <!-- The copy-content target -->
-  <Target Name="Build">
+  <Target Name="CopyContentBuild">
     <Copy SourceFiles="@(Content)" DestinationFiles="@(Content->'$(OutputPath)%(RelativeDir)%(Filename)%(Extension)')" />
   </Target>
-  <Target Name="Clean">
+  <Target Name="Build" DependsOnTargets="CopyContentBuild"></Target>
+  <Target Name="CopyContentClean">
     <Exec Command="rd /s /q $(OutputPath)" Condition="Exists($(OutputPath))" />
   </Target>
+  <Target Name="Clean" DependsOnTargets="CopyContentClean"></Target>
   <Target Name="Rebuild" DependsOnTargets="Clean;Build">
   </Target>
 </Project>

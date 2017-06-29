@@ -41,12 +41,14 @@
     <MSBuildCommunityTasksPath>$(SolutionDir)\.build</MSBuildCommunityTasksPath>
   </PropertyGroup>
   <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets" />
-  <Target Name="Build">
+  <Target Name="ZipContentBuild">
     <Zip ZipFileName="$(OutputPath)\$(MSBuildProjectName).zip" WorkingDirectory="$(MSBuildProjectDir)" Files="@(Content)" />
   </Target>
-  <Target Name="Clean">
-    <Exec Command="rd /s /q $(OutputPath)" Condition="Exists($(OutputPath))" />
+  <Target Name="Build" DependsOnTargets="ZipContentBuild"></Target>
+  <Target Name="ZipContentClean">
+    <Exec Command="del /q $(OutputPath)\$(MSBuildProjectName).zip" Condition="Exists($(OutputPath)\$(MSBuildProjectName).zip)" />
   </Target>
+  <Target Name="Clean" DependsOnTargets="ZipContentClean"></Target>
   <Target Name="Rebuild" DependsOnTargets="Clean;Build">
   </Target>
 </Project>
