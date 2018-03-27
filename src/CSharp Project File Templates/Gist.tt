@@ -3,7 +3,7 @@
 <#@ include file="Common.tt" #>
 <#
 
-Gist.Download(
+Gist.WriteFile(
 	this, // TextTransformation
 	"amwaters", // User
 	"ade95805292888fb84f53d1e3e425ae8", // Gist

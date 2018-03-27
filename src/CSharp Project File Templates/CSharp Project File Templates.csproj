@@ -46,11 +46,6 @@
       <DependentUpon>Common.tt</DependentUpon>
     </Compile>
     <Compile Include="CopyFileExample.cs" />
-    <Compile Include="CopyFile.cs">
-      <DependentUpon>CopyFile.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Gist.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -65,7 +60,16 @@
     </Content>
     <Content Include="CopyFile.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CopyFile.cs</LastGenOutput>
+      <LastGenOutput>CopyFile.txt</LastGenOutput>
+    </Content>
+    <Content Include="CopyFile.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CopyFile.tt</DependentUpon>
+    </Content>
+    <Content Include="GitHub.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>GitHub.md</LastGenOutput>
     </Content>
     <Content Include="Gist.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -74,6 +78,13 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GitHub.md">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GitHub.tt</DependentUpon>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

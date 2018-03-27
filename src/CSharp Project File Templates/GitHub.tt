@@ -1,0 +1,15 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".md" #>
+<#@ include file="Common.tt" #>
+<#
+
+GitHub.WriteFile(
+	this, // TextTransformation
+	"amwaters", // User
+	"vs-templates", // Repository
+	"8a438b0c2a0790f83519659b9530e942123294a8", // Commit
+	"readme.md", // File
+	"`", "`"
+);
+
+#>

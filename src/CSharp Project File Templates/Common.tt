@@ -1,65 +1,77 @@
 ﻿<#+
 
-//////// NEEDS UPDATING
 public static class Gist
 {
 	public static void WriteFile(
 		Microsoft.VisualStudio.TextTemplating.TextTransformation tt,
-		string USER, string GIST, string CMIT, string FILE)
+		string USER, string GIST, string CMIT, string FILE,
+		string COMMENT_START = "//", string COMMENT_END = "")
 	{
-		tt.Write(DownloadString(tt, USER, GIST, CMIT, FILE));
+		tt.Write(
+			DownloadString(
+				USER, GIST, CMIT, FILE,
+				COMMENT_START, COMMENT_END));
 	}
 
 	public static string DownloadString(
-		Microsoft.VisualStudio.TextTemplating.TextTransformation tt,
-		string USER, string GIST, string CMIT, string FILE)
+		string USER, string GIST, string CMIT, string FILE,
+		string COMMENT_START = "//", string COMMENT_END = "")
 	{
-		var source = string.Format(@"https://gist.github.com/{0}/{1}/raw/{2}/{3}", USER, GIST, CMIT, FILE);
+		var source = $"https://gist.github.com/{USER}/{GIST}/raw/{CMIT}/{FILE}";
 
-		var s = "// File '" + FILE + "' downloaded from Gist at " + System.DateTime.Now.ToString()
-			+ "\n// USER: " + USER
-			+ "\n// GIST: " + GIST 
-			+ "\n// CMIT: " + CMIT
-			+ "\n// URL: " + source
-			+ "\n\n";
-
-		using (var client = new System.Net.WebClient())
-			s += client.DownloadString(source);
+		var s = $"// File '{FILE}' downloaded from GitHub Gist at "
+			+ System.DateTime.Now.ToString()
+			+ $"\n// USER: {USER}"
+			+ $"\n// GIST: {GIST}"
+			+ $"\n// CMIT: {CMIT}"
+			+ $"\n// URL: {source}"
+			+ $"\n\n";
+			
+		s += WebDownloader.DownloadString(source);
 		
 		return s;
 	}
 }
 
-public static class Git
+public static class GitHub
 {
-	public static void DownloadFile(
+	public static void WriteFile(
 		Microsoft.VisualStudio.TextTemplating.TextTransformation tt,
 		string USER, string PROJECT, string CMIT, string FILE, 
 		string COMMENT_START = "//", string COMMENT_END = "")
 	{
-		tt.Write(DownloadString(tt, USER, PROJECT, CMIT, FILE, COMMENT_START, COMMENT_END));
+		tt.Write(
+			DownloadString(
+				USER, PROJECT, CMIT, FILE,
+				COMMENT_START, COMMENT_END));
 	}
 
 	public static string DownloadString(
-		Microsoft.VisualStudio.TextTemplating.TextTransformation tt,
 		string USER, string PROJECT, string CMIT, string FILE,
 		string COMMENT_START = "//", string COMMENT_END = "")
 	{
-		var source = string.Format($"https://raw.githubusercontent.com/{USER}/{PROJECT}/{CMIT}/{FILE}");
+		var source = $"https://raw.githubusercontent.com/{USER}/{PROJECT}/{CMIT}/{FILE}";
 
 		var s = $"{COMMENT_START} File '{FILE}' downloaded from GitHub at {System.DateTime.Now.ToString()} {COMMENT_END}"
 			+ $"\n{COMMENT_START} Project: '{USER}/{PROJECT}' Commit: '{CMIT}' {COMMENT_END}"
 			+ $"\n{COMMENT_START} URL: {source} {COMMENT_END}"
 			+ "\n\n";
 
-		using (var client = new System.Net.WebClient())
-			s += client.DownloadString(source);
+		s += WebDownloader.DownloadString(source);
 		
 		return s;
 	}
 }
 
-//////// NEEDS UPDATING
+public static class WebDownloader
+{
+	public static string DownloadString(string url)
+	{
+		using (var client = new System.Net.WebClient())
+			return client.DownloadString(url);
+	}
+}
+
 public static class File
 {
 	public static void Copy(
@@ -74,7 +86,15 @@ public static class File
 			+ "\r\n// PATH: " + PATH
 			+ "\r\n\r\n");
 
-		tt.Write(System.IO.File.ReadAllText(file.FullName));
+		tt.Write(ReadFile(host, PATH));
+	}
+
+	public static string ReadFile(
+		Microsoft.VisualStudio.TextTemplating.ITextTemplatingEngineHost host,
+		string PATH)
+	{
+		var file = new System.IO.FileInfo(host.ResolvePath(PATH));
+		return System.IO.File.ReadAllText(file.FullName);
 	}
 }
 

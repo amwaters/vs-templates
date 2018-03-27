@@ -1,0 +1,4 @@
+﻿// File 'CopyFileExample.cs' copied at 27/03/2018 11:53:40 AM
+// PATH: CopyFileExample.cs
+
+// Copy file example
