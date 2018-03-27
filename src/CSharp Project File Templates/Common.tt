@@ -1,8 +1,9 @@
 ﻿<#+
 
+//////// NEEDS UPDATING
 public static class Gist
 {
-	public static void Download(
+	public static void WriteFile(
 		Microsoft.VisualStudio.TextTemplating.TextTransformation tt,
 		string USER, string GIST, string CMIT, string FILE)
 	{
@@ -29,6 +30,36 @@ public static class Gist
 	}
 }
 
+public static class Git
+{
+	public static void DownloadFile(
+		Microsoft.VisualStudio.TextTemplating.TextTransformation tt,
+		string USER, string PROJECT, string CMIT, string FILE, 
+		string COMMENT_START = "//", string COMMENT_END = "")
+	{
+		tt.Write(DownloadString(tt, USER, PROJECT, CMIT, FILE, COMMENT_START, COMMENT_END));
+	}
+
+	public static string DownloadString(
+		Microsoft.VisualStudio.TextTemplating.TextTransformation tt,
+		string USER, string PROJECT, string CMIT, string FILE,
+		string COMMENT_START = "//", string COMMENT_END = "")
+	{
+		var source = string.Format($"https://raw.githubusercontent.com/{USER}/{PROJECT}/{CMIT}/{FILE}");
+
+		var s = $"{COMMENT_START} File '{FILE}' downloaded from GitHub at {System.DateTime.Now.ToString()} {COMMENT_END}"
+			+ $"\n{COMMENT_START} Project: '{USER}/{PROJECT}' Commit: '{CMIT}' {COMMENT_END}"
+			+ $"\n{COMMENT_START} URL: {source} {COMMENT_END}"
+			+ "\n\n";
+
+		using (var client = new System.Net.WebClient())
+			s += client.DownloadString(source);
+		
+		return s;
+	}
+}
+
+//////// NEEDS UPDATING
 public static class File
 {
 	public static void Copy(
